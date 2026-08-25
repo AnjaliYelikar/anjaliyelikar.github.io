@@ -1,211 +1,528 @@
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjali Yelikar — Personal Site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
 
-    <head>
-        <!-- meta data -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  :root{
+    --paper:      #f6f3ec;
+    --paper-dim:  #efeadf;
+    --ink:        #201e1a;
+    --ink-soft:   #59544a;
+    --navy:       #1f2d4f;
+    --seal:       #7a2330;
+    --gold:       #a9822f;
+    --rule:       #d8d0be;
+    --max-w: 780px;
+    --gutter: 56px;
+  }
 
-        <!--font-family-->
-		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
-        
-        <!-- title of site -->
-        <title>Anjali Yelikar</title>
+  *{ box-sizing:border-box; }
 
-        <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
-       
-        <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation:none !important; transition:none !important; }
+  }
 
-		<!--flat icon css-->
-		<link rel="stylesheet" href="assets/css/flaticon.css">
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Source Serif 4", Georgia, serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
 
-		<!--animate.css-->
-        <link rel="stylesheet" href="assets/css/animate.css">
+  a{ color:inherit; }
 
-        <!--owl.carousel.css-->
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-		<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-		
-        <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- bootsnav -->
-		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
-        
-        <!--style.css-->
-        <link rel="stylesheet" href="assets/css/style.css">
-        
-        <!--responsive.css-->
-        <link rel="stylesheet" href="assets/css/responsive.css">
-        
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		
-        <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+  .mono{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    letter-spacing:.02em;
+  }
 
-    </head>
-	
-	<body>
-		<!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-		
-		<!-- top-area Start -->
-		<header class="top-area">
-			<div class="header-area">
-				<!-- Start Navigation -->
-			    <nav class="navbar navbar-default bootsnav navbar-fixed dark no-background">
+  /* ---------- Skip link / accessibility ---------- */
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--navy); color:var(--paper);
+    padding:10px 16px; z-index:100;
+  }
+  .skip-link:focus{ left:16px; top:16px; }
 
-			        <div class="container">
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--seal);
+    outline-offset:3px;
+  }
 
-			            <!-- Start Header Navigation -->
-			            <div class="navbar-header">
-			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-			                    <i class="fa fa-bars"></i>
-			                </button>
-			                <a class="navbar-brand" href="index.html">Introduction</a>
-			            </div><!--/.navbar-header-->
-			            <!-- End Header Navigation -->
+  /* ---------- Sticky nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(246,243,236,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav .inner{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:14px var(--gutter);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:"Inter", sans-serif;
+    font-size:12.5px;
+  }
+  nav .brand{
+    font-family:"IBM Plex Mono", monospace;
+    font-weight:500;
+    letter-spacing:.03em;
+    color:var(--navy);
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:22px;
+    margin:0; padding:0;
+  }
+  nav a{
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--ink-soft);
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav a::after{
+    content:"";
+    position:absolute; left:0; right:100%; bottom:0;
+    height:1px; background:var(--seal);
+    transition:right .25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{ right:0; }
 
-			            <!-- Collect the nav links, forms, and other content for toggling -->
-			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                <li class=" smooth-menu active"></li>
-			                    <li class=" smooth-menu"><a href="#home">Research</a></li>
-			                    <li class="smooth-menu"><a href="#research">Courses</a></li>
-			                </ul><!--/.nav -->
-			            </div><!-- /.navbar-collapse -->
-			        </div><!--/.container-->
-			    </nav><!--/nav-->
-			    <!-- End Navigation -->
-			</div><!--/.header-area-->
+  /* ---------- Layout shell ---------- */
+  main{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:0 var(--gutter);
+  }
 
-		    <div class="clearfix"></div>
+  section{
+    position:relative;
+    padding:64px 0 12px;
+    border-bottom:1px solid var(--rule);
+  }
+  section:last-of-type{ border-bottom:none; }
 
-		</header><!-- /.top-area-->
-		<!-- top-area End -->
-	
-		<!--welcome-hero start -->
-		<section id="welcome-hero" class="welcome-hero">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="header-text">
-							<h2><span><br> Anjali <br> Yelikar <span></span>   </h2>
-							<p>Gravitational Wave Astrophysicist</p>
-							<a href="documents/CV.pdf" download>download resume</a>
-						</div><!--/.header-text-->
-					</div><!--/.col-->
-				</div><!-- /.row-->
-			</div><!-- /.container-->
+  /* Manuscript-style margin section marks: §N */
+  .sec-mark{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--gold);
+    position:absolute;
+    left:calc(var(--gutter) * -1 + 4px);
+    top:66px;
+  }
+  @media (min-width:900px){
+    .sec-mark{ left:-64px; }
+  }
+  @media (max-width:640px){
+    .sec-mark{ position:static; display:block; margin-bottom:6px; }
+  }
 
-		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
+  h2{
+    font-family:"Source Serif 4", serif;
+    font-weight:600;
+    font-style:italic;
+    font-size:26px;
+    margin:0 0 22px;
+    color:var(--navy);
+  }
 
-		<!--about start -->
-		<section id="about" class="about">
-			<div class="section-heading text-center">
-				<h2>about me</h2>
-			</div>
-			<div class="container">
-				<div class="about-content">
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="single-about-txt">
-								<h3>
-									I am a postdoctoral researcher in the Department of Physics & Astronomy at Vanderbilt University, Nashville, Tennessee. 
-								</h3>
-								<p>
-									I conduct research in the area of gravitational wave astronomy, performing data analysis of gravitational wave signals from mergers of comapct binary objects such as black holes and neutron stars, observable by terrestrial detectors such as advanced Laser Interferometer Gravitational-Wave Observatory (LIGO), advanced Virgo and KAGRA. 
-								</p>
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>email</h3>
-											<p>anjali.yelikar@vanderbilt.edu</p>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>website</h3>
-											<p>anjaliyelikar.github.io</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-offset-1 col-sm-5">
-							<div class="single-about-img">
-								<img src="documents/profile_image.jpg" alt="profile_image">
-								<div class="about-list-icon">
-									<ul>
-										<li>
-											<a href="#">
-												<i  class="fa fa-twitter" aria-hidden="true"></i>
-											</a>
-											
-										</li><!-- / li -->
-										<li>
-											<a href="#">
-												<i  class="fa fa-linkedin" aria-hidden="true"></i>
-											</a>
-										</li><!-- / li -->
-										
-									</ul><!-- / ul -->
-								</div><!-- /.about-list-icon -->
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:72px 0 48px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:40px;
+    align-items:start;
+    border-bottom:1px solid var(--rule);
+  }
+  header.hero .name{
+    font-size:44px;
+    line-height:1.1;
+    font-weight:600;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  header.hero .role{
+    font-family:"Inter", sans-serif;
+    font-size:15.5px;
+    color:var(--ink-soft);
+    margin:0 0 4px;
+  }
+  header.hero .role strong{
+    color:var(--navy);
+    font-weight:600;
+  }
+  header.hero .affil-line{
+    font-family:"Inter", sans-serif;
+    font-size:15.5px;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+  }
+  header.hero .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+  }
+  header.hero .links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+    padding-bottom:1px;
+  }
+  header.hero .links a:hover{ color:var(--seal); border-color:var(--seal); }
 
-							</div>
+  /* Photo — framed like a figure, not a decorative circle */
+  .figure-photo{
+    width:168px;
+  }
+  .figure-photo .frame{
+    width:168px; height:168px;
+    background:var(--paper-dim);
+    border:1px solid var(--ink);
+    padding:6px;
+  }
+  .figure-photo .frame img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    filter:grayscale(15%);
+  }
+  .figure-photo .frame .placeholder{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    font-family:"Inter",sans-serif;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    padding:10px;
+  }
+  .figure-photo figcaption{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:8px;
+    text-align:center;
+  }
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</section><!--/.about-->
-		<!--about end -->
-				
-		<!-- Include all js compiled plugins (below), or include individual files as needed -->
+  @media (max-width:640px){
+    header.hero{
+      grid-template-columns:1fr;
+    }
+    header.hero .figure-photo{ order:-1; margin-bottom:8px; }
+  }
 
-		<script src="assets/js/jquery.js"></script>
-        
-        <!--modernizr.min.js-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-		
-		<!--bootstrap.min.js-->
-        <script src="assets/js/bootstrap.min.js"></script>
-		
-		<!-- bootsnav js -->
-		<script src="assets/js/bootsnav.js"></script>
-		
-		<!-- jquery.sticky.js -->
-		<script src="assets/js/jquery.sticky.js"></script>
-		
-		<!-- for progress bar start-->
+  /* ---------- About / Research prose ---------- */
+  .lede{
+    font-size:18px;
+    color:var(--ink);
+  }
+  .lede + p{ color:var(--ink-soft); }
 
-		<!-- progressbar js -->
-		<script src="assets/js/progressbar.js"></script>
+  .theme-list{
+    list-style:none;
+    margin:26px 0 0;
+    padding:0;
+    display:grid;
+    gap:18px;
+  }
+  .theme-list li{
+    padding-left:18px;
+    border-left:2px solid var(--gold);
+  }
+  .theme-list .theme-name{
+    font-family:"Inter", sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--navy);
+    display:block;
+    margin-bottom:4px;
+  }
 
-		<!-- appear js -->
-		<script src="assets/js/jquery.appear.js"></script>
+  /* ---------- Education ---------- */
+  .cv-list{
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .cv-list li{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:14px 0;
+    border-bottom:1px dotted var(--rule);
+  }
+  .cv-list li:last-child{ border-bottom:none; }
+  .cv-list .what{ }
+  .cv-list .degree{ font-weight:600; color:var(--ink); }
+  .cv-list .where{ color:var(--ink-soft); font-size:15px; }
+  .cv-list .when{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+    padding-top:2px;
+  }
 
-		<!-- for progress bar end -->
+  /* ---------- Affiliations ---------- */
+  .affil-list{
+    list-style:none;
+    margin:0; padding:0;
+    display:grid;
+    gap:12px;
+  }
+  .affil-list li{
+    padding:12px 16px;
+    background:var(--paper-dim);
+    border-left:3px solid var(--navy);
+  }
+  .affil-list .org{ font-weight:600; }
+  .affil-list .detail{ color:var(--ink-soft); font-size:15px; }
+  .affil-list a{ text-decoration:underline; text-decoration-color:var(--rule); }
+  .affil-list a:hover{ text-decoration-color:var(--seal); }
 
-		<!--owl.carousel.js-->
-        <script src="assets/js/owl.carousel.min.js"></script>
+  /* ---------- Publications (bibliography style) ---------- */
+  .pub-year{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--gold);
+    margin:28px 0 10px;
+    padding-top:6px;
+  }
+  .pub-year:first-of-type{ margin-top:0; }
 
+  .pub-list{
+    list-style:none;
+    margin:0 0 8px; padding:0;
+    counter-reset:pub;
+  }
+  .pub-list li{
+    counter-increment:pub;
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:4px 0;
+    padding:12px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .pub-list li:last-child{ border-bottom:none; }
+  .pub-list li::before{
+    content:"[" counter(pub) "]";
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    grid-row:1 / span 2;
+  }
+  .pub-list .citation{
+    grid-column:2;
+    color:var(--ink);
+  }
+  .pub-list .citation strong{ color:var(--navy); }
+  .pub-list .venue{
+    grid-column:2;
+    font-family:"Inter", sans-serif;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+  .pub-list .tags{
+    grid-column:2;
+    display:flex; gap:14px;
+    margin-top:4px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+  }
+  .pub-list .tags a{
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+  }
+  .pub-list .tags a:hover{ color:var(--seal); border-color:var(--seal); }
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-		
-        
-        <!--Custom JS-->
-        <script src="assets/js/custom.js"></script>
-        
-    </body>
-	
+  /* ---------- Footer ---------- */
+  footer{
+    padding:40px 0 60px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  footer .cite-block{
+    background:var(--paper-dim);
+    border:1px dashed var(--rule);
+    padding:14px 16px;
+    margin-bottom:18px;
+    line-height:1.6;
+  }
+  footer .cite-block .tag{ color:var(--gold); }
+
+  ::selection{ background:var(--seal); color:var(--paper); }
+
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav>
+  <div class="inner">
+    <span class="brand">J.A.R.</span>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#affiliations">Affiliations</a></li>
+      <li><a href="#publications">Publications</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+
+  <header class="hero">
+    <div>
+      <p class="name">Anjali Yelikar</p>
+      <p class="role"><strong>Postdoctoral Researcher</strong>, Department of Physics & Astronomy</p>
+      <p class="affil-line">Vanderbilt University</p>
+      <div class="links">
+        <a href="mailto:anjali.yelikar@vanderbilt.edu">email</a>
+        <a href="https://github.com/AnjaliYelikar" target="_blank" rel="noopener">github</a>
+        <a href="https://scholar.google.com/" target="_blank" rel="noopener">scholar</a>
+        <a href="https://orcid.org/0000-0002-8065-1174" target="_blank" rel="noopener">orcid</a>
+        <a href="assets/cv.pdf" target="_blank" rel="noopener">cv (pdf)</a>
+      </div>
+    </div>
+
+    <figure class="figure-photo">
+      <div class="frame">
+        <!-- Replace the placeholder div below with:
+             <img src="assets/img/profile.jpg" alt="Anjali Yelikar"> -->
+        <div class="placeholder">photo<br>assets/img/<br>profile.jpg</div>
+      </div>
+    </figure>
+  </header>
+
+  <section id="about">
+    <span class="sec-mark">§1</span>
+    <h2>Overview</h2>
+    <p class="lede">I work on [your core research area], with a focus on [specific problem or question you care about].</p>
+    <p>I completed my PhD at [University] in [Year], and currently hold a position at [Institute]. My work sits at the intersection of [Field A] and [Field B], and has been supported by [funding body, if applicable].</p>
+  </section>
+
+  <section id="research">
+    <span class="sec-mark">§2</span>
+    <h2>Research Summary</h2>
+    <p>Briefly describe the throughline of your research program in 3–4 sentences — the problem space, your approach, and why it matters. This is the paragraph a reader skims first, so keep it concrete.</p>
+
+    <ul class="theme-list">
+      <li>
+        <span class="theme-name">Theme One</span>
+        One sentence on this research thread and what makes it distinct.
+      </li>
+      <li>
+        <span class="theme-name">Theme Two</span>
+        One sentence on this research thread and what makes it distinct.
+      </li>
+      <li>
+        <span class="theme-name">Theme Three</span>
+        One sentence on this research thread and what makes it distinct.
+      </li>
+    </ul>
+  </section>
+
+  <section id="education">
+    <span class="sec-mark">§3</span>
+    <h2>Education</h2>
+    <ul class="cv-list">
+      <li>
+        <div class="what">
+          <div class="degree">PhD, Astrophysical Sciences & Technology</div>
+          <div class="where">Rochester Institute of Technology, Department of Physics & Astronomy</div>
+        </div>
+        <div class="when">2021 – 2024</div>
+      </li>
+      <li>
+        <div class="what">
+          <div class="degree">M.S., Astrophysical Sciences & Technology</div>
+          <div class="where">Rochester Institute of Technology, Department of Physics & Astronomy</div>
+        </div>
+        <div class="when">2019 – 2021</div>
+      </li>
+      <li>
+        <div class="what">
+          <div class="degree">B.S.-M.S., Physics</div>
+          <div class="where">Indian Institute of Science Education & Research, Thiruvananthapuram</div>
+        </div>
+        <div class="when">2013 – 2018</div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <span class="sec-mark">§5</span>
+    <h2>Publications</h2>
+
+    <p class="pub-year mono">2025</p>
+    <ul class="pub-list">
+      <li>
+        <p class="citation"><strong>Researcher, J. A.</strong>, Coauthor, B. (2025). Title of the paper goes here and can wrap to a second line.</p>
+        <p class="venue">Conference / Journal Name</p>
+        <div class="tags">
+          <a href="#" target="_blank" rel="noopener">pdf</a>
+          <a href="#" target="_blank" rel="noopener">code</a>
+          <a href="#" target="_blank" rel="noopener">doi</a>
+        </div>
+      </li>
+    </ul>
+
+    <p class="pub-year mono">2024</p>
+    <ul class="pub-list">
+      <li>
+        <p class="citation">Coauthor, B., <strong>Researcher, J. A.</strong>, Coauthor, C. (2024). Another paper title.</p>
+        <p class="venue">Conference / Journal Name</p>
+        <div class="tags">
+          <a href="#" target="_blank" rel="noopener">pdf</a>
+          <a href="#" target="_blank" rel="noopener">doi</a>
+        </div>
+      </li>
+      <li>
+        <p class="citation"><strong>Researcher, J. A.</strong> (2024). A third paper title, perhaps a preprint.</p>
+        <p class="venue">arXiv preprint</p>
+        <div class="tags">
+          <a href="#" target="_blank" rel="noopener">pdf</a>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="cite-block">
+      <span class="tag">@site</span>{anjaliyelikar_personal,<br>
+      &nbsp;&nbsp;author = {Yelikar, Anjali },<br>
+      &nbsp;&nbsp;year = {2026},<br>
+      &nbsp;&nbsp;url = {https://anjaliyelikar.github.io}<br>
+      }
+    </div>
+    Last updated August 2026 · Built with HTML/CSS, hosted on GitHub Pages
+  </footer>
+
+</main>
+
+</body>
 </html>
