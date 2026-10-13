@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjali B. Yelikar — Personal Site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --paper:      #faf6fa;
+    --paper-dim:  #f1e8f2;
+    --ink:        #2f2b38;
+    --ink-soft:   #7a7286;
+    --navy:       #6b76a8;
+    --seal:       #c48a95;
+    --gold:       #d9ab7d;
+    --rule:       #e6dbe8;
+    --max-w: 780px;
+    --gutter: 56px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Source Serif 4", Georgia, serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+
+  .mono{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    letter-spacing:.02em;
+  }
+
+  /* ---------- Skip link / accessibility ---------- */
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    background:var(--navy); color:var(--paper);
+    padding:10px 16px; z-index:100;
+  }
+  .skip-link:focus{ left:16px; top:16px; }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--seal);
+    outline-offset:3px;
+  }
+
+  /* ---------- Sticky nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(250,246,250,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav .inner{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:14px var(--gutter);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:"Inter", sans-serif;
+    font-size:12.5px;
+  }
+  nav .brand{
+    font-family:"IBM Plex Mono", monospace;
+    font-weight:500;
+    letter-spacing:.03em;
+    color:var(--navy);
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:22px;
+    margin:0; padding:0;
+  }
+  nav a{
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--ink-soft);
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav a::after{
+    content:"";
+    position:absolute; left:0; right:100%; bottom:0;
+    height:1px; background:var(--seal);
+    transition:right .25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{ right:0; }
+
+  /* ---------- Layout shell ---------- */
+  main{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:0 var(--gutter);
+  }
+
+  section{
+    position:relative;
+    padding:64px 0 12px;
+    border-bottom:1px solid var(--rule);
+  }
+  section:last-of-type{ border-bottom:none; }
+
+  /* Manuscript-style margin section marks: §N */
+  .sec-mark{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--gold);
+    position:absolute;
+    left:calc(var(--gutter) * -1 + 4px);
+    top:66px;
+  }
+  @media (min-width:900px){
+    .sec-mark{ left:-64px; }
+  }
+  @media (max-width:640px){
+    .sec-mark{ position:static; display:block; margin-bottom:6px; }
+  }
+
+  h2{
+    font-family:"Source Serif 4", serif;
+    font-weight:600;
+    font-style:italic;
+    font-size:26px;
+    margin:0 0 22px;
+    color:var(--navy);
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:72px 0 48px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:40px;
+    align-items:start;
+    border-bottom:1px solid var(--rule);
+  }
+  header.hero .name{
+    font-size:44px;
+    line-height:1.1;
+    font-weight:600;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  header.hero .role{
+    font-family:"Inter", sans-serif;
+    font-size:15.5px;
+    color:var(--ink-soft);
+    margin:0 0 4px;
+  }
+  header.hero .role strong{
+    color:var(--navy);
+    font-weight:600;
+  }
+  header.hero .affil-line{
+    font-family:"Inter", sans-serif;
+    font-size:15.5px;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+  }
+  header.hero .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+  }
+  header.hero .links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+    padding-bottom:1px;
+  }
+  header.hero .links a:hover{ color:var(--seal); border-color:var(--seal); }
+
+  /* Photo — framed like a figure, not a decorative circle */
+  .figure-photo{
+    width:168px;
+  }
+  .figure-photo .frame{
+    width:168px; height:168px;
+    background:var(--paper-dim);
+    border:1px solid var(--ink);
+    padding:6px;
+  }
+  .figure-photo .frame img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    filter:grayscale(15%);
+  }
+  .figure-photo .frame .placeholder{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    font-family:"Inter",sans-serif;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    padding:10px;
+  }
+  .figure-photo figcaption{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:8px;
+    text-align:center;
+  }
+
+  @media (max-width:640px){
+    header.hero{
+      grid-template-columns:1fr;
+    }
+    header.hero .figure-photo{ order:-1; margin-bottom:8px; }
+  }
+
+  /* ---------- Banner graphic (full-bleed figure under hero) ---------- */
+  .banner-figure{
+    margin:0 0 8px;
+    padding:28px 0 8px;
+  }
+  .banner-figure .slot{
+    width:100%;
+    aspect-ratio:16/5;
+    background:var(--paper-dim);
+    border:1px dashed var(--rule);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .banner-figure .slot img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .banner-figure .slot .placeholder{
+    font-family:"Inter", sans-serif;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .banner-figure figcaption{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:8px;
+  }
+  @media (max-width:640px){
+    .banner-figure .slot{ aspect-ratio:4/3; }
+  }
+
+  /* ---------- About / Research prose ---------- */
+  .lede{
+    font-size:18px;
+    color:var(--ink);
+  }
+  .lede + p{ color:var(--ink-soft); }
+
+  .theme-list{
+    list-style:none;
+    margin:26px 0 0;
+    padding:0;
+    display:grid;
+    gap:24px;
+  }
+  .theme-list li{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:18px;
+    align-items:start;
+    padding-left:0;
+    border-left:none;
+    padding-bottom:22px;
+    border-bottom:1px solid var(--rule);
+  }
+  .theme-list li:last-child{ border-bottom:none; padding-bottom:0; }
+  .theme-list .theme-fig{
+    width:120px; height:88px;
+    background:var(--paper-dim);
+    border:1px dashed var(--rule);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .theme-list .theme-fig img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .theme-list .theme-fig .placeholder{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:10px;
+    color:var(--ink-soft);
+    text-align:center;
+    padding:4px;
+  }
+  .theme-list .theme-text{
+    border-left:2px solid var(--gold);
+    padding-left:18px;
+  }
+  .theme-list .theme-name{
+    font-family:"Inter", sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--navy);
+    display:block;
+    margin-bottom:4px;
+  }
+  @media (max-width:640px){
+    .theme-list li{ grid-template-columns:1fr; }
+    .theme-list .theme-fig{ width:100%; height:140px; }
+  }
+
+  /* ---------- Outreach / photo gallery ---------- */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    margin:24px 0 0;
+  }
+  .gallery-grid figure{
+    margin:0;
+  }
+  .gallery-grid .slot{
+    width:100%;
+    aspect-ratio:4/3;
+    background:var(--paper-dim);
+    border:1px dashed var(--rule);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .gallery-grid .slot img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .gallery-grid .slot .placeholder{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:10.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    padding:6px;
+  }
+  .gallery-grid figcaption{
+    font-family:"Inter", sans-serif;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:6px;
+    line-height:1.4;
+  }
+  @media (max-width:640px){
+    .gallery-grid{ grid-template-columns:1fr 1fr; }
+  }
+
+  /* ---------- Education ---------- */
+  .cv-list{
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .cv-list li{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:14px 0;
+    border-bottom:1px dotted var(--rule);
+  }
+  .cv-list li:last-child{ border-bottom:none; }
+  .cv-list .what{ }
+  .cv-list .degree{ font-weight:600; color:var(--ink); }
+  .cv-list .where{ color:var(--ink-soft); font-size:15px; }
+  .cv-list .when{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+    padding-top:2px;
+  }
+
+  /* ---------- Affiliations ---------- */
+  .affil-list{
+    list-style:none;
+    margin:0; padding:0;
+    display:grid;
+    gap:12px;
+  }
+  .affil-list li{
+    padding:12px 16px;
+    background:var(--paper-dim);
+    border-left:3px solid var(--navy);
+  }
+  .affil-list .org{ font-weight:600; }
+  .affil-list .detail{ color:var(--ink-soft); font-size:15px; }
+  .affil-list a{ text-decoration:underline; text-decoration-color:var(--rule); }
+  .affil-list a:hover{ text-decoration-color:var(--seal); }
+
+  /* ---------- Publications (bibliography style) ---------- */
+  .pub-year{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--gold);
+    margin:28px 0 10px;
+    padding-top:6px;
+  }
+  .pub-year:first-of-type{ margin-top:0; }
+
+  .pub-list{
+    list-style:none;
+    margin:0 0 8px; padding:0;
+    counter-reset:pub;
+  }
+  .pub-list li{
+    counter-increment:pub;
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:4px 0;
+    padding:12px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .pub-list li:last-child{ border-bottom:none; }
+  .pub-list li::before{
+    content:"[" counter(pub) "]";
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    grid-row:1 / span 2;
+  }
+  .pub-list .citation{
+    grid-column:2;
+    color:var(--ink);
+  }
+  .pub-list .citation strong{ color:var(--navy); }
+  .pub-list .venue{
+    grid-column:2;
+    font-family:"Inter", sans-serif;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+  .pub-list .tags{
+    grid-column:2;
+    display:flex; gap:14px;
+    margin-top:4px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+  }
+  .pub-list .tags a{
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+  }
+  .pub-list .tags a:hover{ color:var(--seal); border-color:var(--seal); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:40px 0 60px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  footer .cite-block{
+    background:var(--paper-dim);
+    border:1px dashed var(--rule);
+    padding:14px 16px;
+    margin-bottom:18px;
+    line-height:1.6;
+  }
+  footer .cite-block .tag{ color:var(--gold); }
+
+  ::selection{ background:var(--seal); color:var(--paper); }
+
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav>
+  <div class="inner">
+    <span class="brand">A.B.Y.</span>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#publications">Publications</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+
+  <header class="hero">
+    <div>
+      <p class="name">Anjali B. Yelikar</p>
+      <p class="role"><strong>GRAVITY Postdoctoral Scholar</strong>, Department of Physics &amp; Astronomy</p>
+      <p class="affil-line">Vanderbilt University · Nashville, TN, USA</p>
+      <div class="links">
+        <a href="mailto:anjali.yelikar@vanderbilt.edu">email</a>
+        <a href="https://github.com/AnjaliYelikar" target="_blank" rel="noopener">github</a>
+        <!-- Add your Google Scholar profile link here once you have it handy -->
+        <a href="https://scholar.google.com/citations?user=HDqNBrkAAAAJ&hl=en" target="_blank" rel="noopener">scholar</a>
+        <!-- Add your ORCID iD link here, e.g. https://orcid.org/0000-0000-0000-0000 -->
+        <a href="https://orcid.org/0000-0002-8065-1174" target="_blank" rel="noopener">orcid</a>
+      </div>
+    </div>
+
+    <figure class="figure-photo">
+      <div class="frame">
+        <!-- Replace the placeholder div below with:
+             <img src="assets/img/profile.jpg" alt="Anjali B. Yelikar"> -->
+        <div class="placeholder">photo<br>assets/img/<br>profile.jpg</div>
+      </div>
+    </figure>
+  </header>
+
+  <section id="about">
+    <span class="sec-mark">§1</span>
+    <h2>Overview</h2>
+    <p class="lede">I am a GRAVITY Postdoctoral Scholar in the Department of Physics &amp; Astronomy at Vanderbilt University, working on gravitational-wave astrophysics.</p>
+    <p>I completed my Ph.D. in Astrophysical Sciences and Technology at the Rochester Institute of Technology in 2024, advised by Prof. Richard O'Shaughnessy, with a dissertation on binary neutron stars — from interpreting individual events to inferring population properties. Before that, I was a Junior Research Fellow at the Chennai Mathematical Institute, and I hold a BS-MS in Physics (minor in Chemistry) from IISER-Thiruvananthapuram.</p>
+  </section>
+
+  <section id="research">
+    <span class="sec-mark">§2</span>
+    <h2>Research Summary</h2>
+    <p>My research centers on gravitational-wave astrophysics: extracting the physical properties of compact binary coalescences from their signals, understanding how systematic effects in waveform models bias those inferences, and using populations of neutron star and black hole mergers to constrain the nuclear equation of state and test General Relativity. More recently, my work has extended to multiband and multimessenger prospects for gravitational-wave detectors on the Moon.</p>
+
+    <ul class="theme-list">
+      <li>
+        <span class="theme-name">Parameter Estimation &amp; Waveform Systematics</span>
+        Developing and applying rapid inference methods (RIFT) to compact binary coalescence signals, and quantifying how waveform-model choices bias the resulting parameter inferences.
+      </li>
+      <li>
+        <span class="theme-name">Neutron Star Populations &amp; the Nuclear EOS</span>
+        Inferring population-level properties of binary neutron star mergers to constrain the nuclear equation of state and extreme matter.
+      </li>
+      <li>
+        <span class="theme-name">Multiband &amp; Multimessenger GW Astrophysics</span>
+        Studying the science case for gravitational-wave detectors on the Moon (e.g. LILA) and their synergy with Earth-based detectors for compact binaries.
+      </li>
+    </ul>
+  </section>
+
+  <section id="education">
+    <span class="sec-mark">§3</span>
+    <h2>Education</h2>
+    <ul class="cv-list">
+      <li>
+        <div class="what">
+          <div class="degree">Ph.D., Astrophysical Sciences and Technology</div>
+          <div class="where">Rochester Institute of Technology, NY, USA — Dissertation: "Binary Neutron Stars: From Interpreting Individual Events to Inferring Population Properties"</div>
+        </div>
+        <div class="when">Aug 2021 – Aug 2024</div>
+      </li>
+      <li>
+        <div class="what">
+          <div class="degree">M.S., Astrophysical Sciences and Technology</div>
+          <div class="where">Rochester Institute of Technology, NY, USA</div>
+        </div>
+        <div class="when">Aug 2019 – Aug 2021</div>
+      </li>
+      <li>
+        <div class="what">
+          <div class="degree">BS-MS, Physics (Minor: Chemistry)</div>
+          <div class="where">IISER-Thiruvananthapuram, Kerala, India</div>
+        </div>
+        <div class="when">Aug 2013 – Jun 2018</div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <span class="sec-mark">§4</span>
+    <h2>Publications</h2>
+
+    <ul class="pub-list">
+      <li>
+        <p class="citation"><strong>Yelikar, A. B.</strong>, Jani, K. Binary Neutron Stars from the Moon: Early Warnings and Precision Science for the Artemis Era.</p>
+        <p class="venue">Class. Quantum Grav. 43, 125008 (2026)</p>
+      </li>
+      <li>
+        <p class="citation">Pichardo Marcano, M., <strong>Yelikar, A. B.</strong>, Jani, K. Massive Double White Dwarf Binary Mergers from the Moon: Extending the Reach of Multi-messenger Astrophysics.</p>
+        <p class="venue">Astrophys. J. 992 (2025) 1, 16</p>
+      </li>
+      <li>
+        <p class="citation">Ruiz-Rocha, K., <strong>Yelikar, A. B.</strong>, Lange, J., Gabella, W., Weller, R. A., O'Shaughnessy, R., Holley-Bockelmann, K., Jani, K. Properties of 'Lite' Intermediate-Mass Black Hole Candidates in LIGO-Virgo's Third Observing Run.</p>
+        <p class="venue">ApJL 985 L37 (2025)</p>
+      </li>
+      <li>
+        <p class="citation"><strong>Yelikar, A. B.</strong>, O'Shaughnessy, R., Wysocki, D., Wade, L. Effects of waveform systematics on inferences of neutron star population properties and the nuclear equation of state.</p>
+        <p class="venue">Submitted to Physical Review D</p>
+        <div class="tags">
+          <a href="https://arxiv.org/abs/2410.14674" target="_blank" rel="noopener">arxiv</a>
+        </div>
+      </li>
+      <li>
+        <p class="citation"><strong>Yelikar, A. B.</strong>, O'Shaughnessy, R., Lange, J., Jan, A. Z. Waveform systematics in gravitational-wave inference of signals from binary neutron star merger models incorporating higher-order modes information.</p>
+        <p class="venue">Phys. Rev. D 110, 064024 (2024)</p>
+      </li>
+      <li>
+        <p class="citation">Wofford, J., <strong>Yelikar, A.</strong>, Gallagher, H., Champion, E., Wysocki, D., Delfavero, V., Lange, J., Rose, C., Valsan, V., Morisaki, S., Read, J., Henshaw, C., O'Shaughnessy, R. Improving performance for gravitational-wave parameter inference with an efficient and highly-parallelized algorithm.</p>
+        <p class="venue">Phys. Rev. D 107, 024040 (2023)</p>
+        <div class="tags">
+          <a href="https://arxiv.org/abs/2210.07912" target="_blank" rel="noopener">arxiv</a>
+        </div>
+      </li>
+      <li>
+        <p class="citation">Jan, A. Z., <strong>Yelikar, A. B.</strong>, Lange, J., O'Shaughnessy, R. Assessing and marginalizing over compact binary coalescence waveform systematics with RIFT.</p>
+        <p class="venue">Phys. Rev. D 102, 124069 (2020)</p>
+      </li>
+      <li>
+        <p class="citation">Krishnendu, N. V., <strong>Yelikar, A. B.</strong> Testing the Kerr nature of supermassive and intermediate-mass black hole binaries using spin-induced multipole moment measurements.</p>
+        <p class="venue">Class. Quantum Grav. 37 (2020) 205019</p>
+      </li>
+    </ul>
+
+  </section>
+
+  <footer>
+    <div class="cite-block">
+      <span class="tag">@site</span>{yelikar_personal,<br>
+      &nbsp;&nbsp;author = {Yelikar, Anjali B.},<br>
+      &nbsp;&nbsp;year = {2026},<br>
+      &nbsp;&nbsp;url = {https://anjaliyelikar.github.io}<br>
+      }
+    </div>
+    Last updated September 2026 · Built with HTML/CSS, hosted on GitHub Pages
+  </footer>
+
+</main>
+
+</body>
+</html>
